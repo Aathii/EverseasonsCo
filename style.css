@@ -809,3 +809,151 @@ textarea{
   .hero-title{ white-space: normal; }
   .hero-logo img{ width: 220px; }
 }
+
+
+
+/* CSS FOR 6 PANEL SERVICES INDEX */ 
+/* ===== Services: 6 full-width panels (Majesty style) ===== */
+
+.services-full{
+  padding: 0; /* no container padding */
+}
+
+/* full-bleed wrapper */
+.services-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+
+  /* 2 rows worth of panels */
+  gap: 0;
+}
+
+/* each panel */
+.service-panel{
+  position: relative;
+  height: 420px;
+  overflow: hidden;
+  display: block;
+
+  /* subtle divider lines like premium sites */
+  border-right: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* remove right border on 3rd column */
+.service-panel:nth-child(3n){
+  border-right: none;
+}
+
+/* background image layer */
+.service-panel::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.02);
+  transition: transform .65s ease;
+  z-index: 0;
+}
+
+/* dim overlay layer */
+.service-panel::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(to top, rgba(0,0,0,.72), rgba(0,0,0,.10));
+  opacity: .55;
+  transition: opacity .25s ease;
+  z-index: 1;
+}
+
+/* text */
+.service-title{
+  position:absolute;
+  left: 28px;
+  bottom: 28px;
+  z-index: 2;
+
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-size: 16px;
+
+  transform: translateY(0);
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+/* arrow (optional) */
+.service-arrow{
+  position:absolute;
+  left: 28px;
+  bottom: 28px;
+  z-index: 2;
+
+  font-weight: 900;
+  font-size: 20px;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+/* hover effect: dim more + raise name */
+.service-panel:hover::after{
+  opacity: .78; /* dim background */
+}
+
+.service-panel:hover::before{
+  transform: scale(1.08);
+}
+
+.service-panel:hover .service-title{
+  transform: translateY(-22px); /* raise service name */
+}
+
+.service-panel:hover .service-arrow{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* click focus for accessibility */
+.service-panel:focus-visible{
+  outline: 2px solid rgba(215,179,90,0.9);
+  outline-offset: -2px;
+}
+
+/* ===== Set your 6 background images here ===== */
+.sp-1::before{ background-image: url("windowcleaning.jpeg"); }
+.sp-2::before{ background-image: url("guttercleaning.jpeg"); }
+.sp-3::before{ background-image: url("pressure washing.webp"); }
+
+/* Replace these 3 with your real images */
+.sp-4::before{ background-image: url("deckstain.jpeg"); }
+.sp-5::before{ background-image: url("drivewayseal.webp"); }
+.sp-6::before{ background-image: url("snowremoval.jpeg"); }
+
+/* ===== Responsive ===== */
+@media (max-width: 980px){
+  .services-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .service-panel{
+    height: 280px;
+    border-right: none;
+  }
+
+  .service-title{
+    font-size: 14px;
+    left: 18px;
+    bottom: 18px;
+  }
+
+  .service-arrow{
+    left: 18px;
+    bottom: 18px;
+  }
+}
