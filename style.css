@@ -82,10 +82,17 @@ img{ max-width: 100%; display: block; }
   left: 0;
   width: 100%;
   z-index: 1000;
-
   background: transparent;
-  padding: 14px 0;
-  transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
+  padding: 0;
+  transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+  position: relative;
 }
 
 .site-header .nav {
@@ -93,11 +100,6 @@ img{ max-width: 100%; display: block; }
   z-index: 2;
 }
 
-.site-header.scrolled {
-  background: rgba(0, 0, 0, 0.88);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-}
 
 .site-header.scrolled {
   background: rgba(0, 0, 0, 0.88);
@@ -112,13 +114,6 @@ body {
 
 main {
   padding-top: 0;
-}
-.nav{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 22px 0;
-  position: relative;
 }
 
 /* Optional left logo */
@@ -666,9 +661,48 @@ main {
 .work-video{ background: #000; }
 
 @media (max-width: 980px){
-  .gallery-grid{ grid-template-columns: 1fr; }
-  .work-card img,
-  .work-card video{ height: 220px; }
+  .nav {
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0;
+  }
+
+  .nav-links {
+    position: static;
+    left: auto;
+    transform: none;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+  }
+
+  .nav-links a {
+    display: none;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 6px 0;
+    border-bottom: none;
+  }
+
+  /* show only these 3 links on mobile */
+  .nav-links a[href="#home"],
+  .nav-links a[href="gallery.html"],
+  .nav-links a[href="#contact"] {
+    display: inline-block;
+  }
+
+  .nav-actions {
+    display: none; /* hides search + booking on mobile so nuh clutter*/
+  }
+
+  .site-header {
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(8px);
+  }
 }
 
 /* ===== FAQ ===== */
@@ -813,7 +847,6 @@ textarea{
 /* ===== Responsive ===== */
 
 @media (max-width: 980px){
-  .nav-links{ display: none; }
 
   .tiles{ grid-template-columns: 1fr; }
   .tile{ height: 260px; }
