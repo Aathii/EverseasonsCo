@@ -288,8 +288,7 @@
           <div class="contact-panel">
             <p class="eyebrow">CONTACT US</p>
             <h2 class="contact-title">GIVE YOUR HOME THE CARE IT DESERVES!</h2>
-            <form class="form" action="https://formspree.io/f/xjgenrjw" method="POST">
-
+            <form class="form">
               <div class="row">
                 <label>
                   <span>Name</span>
@@ -317,7 +316,7 @@
               </div>
             
               <!-- spam protection -->
-              <input type="text" name="_gotcha" style="display:none">
+              <input type="text" name="_honey" style="display:none">
             
               <button class="btn btn-gold btn-wide" type="submit">
                 <span class="paper" aria-hidden="true">✈</span>
@@ -361,5 +360,51 @@
           }
         });
         </script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <script>
+    (function () {
+      emailjs.init("vnOJ8RVKlrSvZqJ37");
+    })();
+  
+    document.querySelector(".form").addEventListener("submit", function (e) {
+      e.preventDefault();
+  
+      const form = this;
+      const button = form.querySelector('button[type="submit"]');
+  
+      button.disabled = true;
+      button.innerHTML = "SENDING...";
+  
+      const data = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        message: form.message.value.trim()
+      };
+  
+      emailjs.send("service_1k2iemk", "template_e56h23b", data)
+        .then(function (response) {
+          console.log("Owner email sent:", response);
+          return new Promise(resolve => setTimeout(resolve, 1500));
+        })
+        .then(function () {
+          return emailjs.send("service_1k2iemk", "template_hwg60lp", data);
+        })
+        .then(function (response) {
+          console.log("Auto-reply sent:", response);
+          alert("Message sent! We will contact you shortly.");
+          form.reset();
+        })
+        .catch(function (error) {
+          console.log("FULL EMAILJS ERROR:", error);
+          alert("Something went wrong. Check console.");
+        })
+        .finally(function () {
+          button.disabled = false;
+          button.innerHTML = '<span class="paper" aria-hidden="true">✈</span> GET IN TOUCH';
+        });
+    });
+  </script>
   </body>
 </html>
