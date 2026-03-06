@@ -76,13 +76,15 @@ img{ max-width: 100%; display: block; }
 
 /* ===== Header / Nav ===== */
 
-.site-header{
-  position: absolute;
+.site-header {
+  position: fixed;   /* header will follow scroll */
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 50;
+  z-index: 1000;
+
   background: transparent;
+  transition: background 0.3s ease, backdrop-filter 0.3s ease;
 }
 
 .nav{
