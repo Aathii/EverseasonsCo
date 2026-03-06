@@ -12,13 +12,19 @@
   </head>
 
   <body>
-    <header class="site-header">
+    <header class="site-header scrolled">
       <div class="container nav">
         <a class="brand" href="index.html">
           <img class="brand-logo" src="everseasonslogo.jpg" alt="EverSeasons" />
         </a>
-
-        <nav class="nav-links" aria-label="Primary">
+    
+        <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+    
+        <nav class="nav-links" id="mobile-menu" aria-label="Primary">
           <a href="index.html#home">Home</a>
           <a href="index.html#about">About</a>
           <a href="index.html#services">Services</a>
@@ -26,7 +32,7 @@
           <a href="index.html#faq">FAQs</a>
           <a href="index.html#contact">Contact</a>
         </nav>
-
+    
         <div class="nav-actions">
           <a class="icon-btn" href="index.html#contact" aria-label="Search">
             <span class="icon">⌕</span>
@@ -95,6 +101,40 @@
     </script>
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
+    
+      window.addEventListener("scroll", function () {
+        const header = document.querySelector(".site-header");
+    
+        if (window.scrollY > 80) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+    </script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+    
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+          menuToggle.classList.toggle('active');
+          navLinks.classList.toggle('open');
+    
+          const expanded = menuToggle.classList.contains('active');
+          menuToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        });
+    
+        navLinks.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      });
     
       window.addEventListener("scroll", function () {
         const header = document.querySelector(".site-header");
